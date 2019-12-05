@@ -502,7 +502,7 @@ func analyzeBlock(b tsdb.BlockReader, limit int) error {
 	labelpairsUncovered := map[string]uint64{}
 	labelpairsCount := map[string]uint64{}
 	entries := 0
-	p, err := ir.Postings("", "") // The special all key.
+	p, err := ir.Postings("", []string{""}) // The special all key.
 	if err != nil {
 		return err
 	}
@@ -598,7 +598,7 @@ func analyzeBlock(b tsdb.BlockReader, limit int) error {
 			return err
 		}
 		for _, n := range names {
-			postings, err := ir.Postings("__name__", n)
+			postings, err := ir.Postings("__name__", []string{n})
 			if err != nil {
 				return err
 			}
